@@ -1,7 +1,7 @@
 import {useEffect, useState , useRef} from 'react'
 import arrow from '../Image/arrow.png'
 import Upload from './Upload.jsx';
-import model from "../lib/Gemini.js"
+import model from "../Lib/Gemini.js"
 import { IKImage } from 'imagekitio-react';
 import Markdown from 'react-markdown';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
