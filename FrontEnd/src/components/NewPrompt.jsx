@@ -1,5 +1,5 @@
 import {useEffect, useState , useRef} from 'react'
-import arrow from '../image/arrow.png'
+import arrow from '../Image/arrow.png'
 import Upload from './Upload.jsx';
 import model from "../lib/Gemini.js"
 import { IKImage } from 'imagekitio-react';
