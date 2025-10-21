@@ -19,7 +19,7 @@ const __dirname = path.dirname(__filename);
 
 app.use(
   cors({
-    origin:"https://lemon-ai-nato.onrender.com",
+    origin:process.env.CLIENT_URL,
     credentials:true,
 }))
 
