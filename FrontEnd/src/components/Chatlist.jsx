@@ -7,7 +7,7 @@ const ChatList = () =>{
     const {isPending , error , data} = useQuery({
         queryKey:["userChats"],
         queryFn:()=>
-            fetch(`https://lemon-ai-nato.onrender.com/api/userchats`,{
+            fetch(`${import.meta.env.VITE_API_URL}/api/userchats`,{
                     credentials:"include",
                 }
             ).then((res) => res.json())
