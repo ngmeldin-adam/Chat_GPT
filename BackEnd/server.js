@@ -11,7 +11,7 @@ import {ClerkExpressRequireAuth} from "@clerk/clerk-sdk-node"
 
 const port = process.env.PORT || 3000
 const app = express()
-
+const FrontendUrl = "https://lemon-ai-nato.onrender.com";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,7 +20,7 @@ const __dirname = path.dirname(__filename);
 
 app.use(
   cors({
-    origin:["https://lemon-ai-nato.onrender.com"],
+    origin:FrontendUrl,
     credentials:true,
 }))
 
