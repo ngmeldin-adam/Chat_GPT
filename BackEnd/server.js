@@ -22,7 +22,6 @@ app.use(
   cors({
     origin:"https://lemon-ai-nato.onrender.com",
     credentials:true,
-     methods:["GET","POST"],
 }))
 
 dotenv.config()
