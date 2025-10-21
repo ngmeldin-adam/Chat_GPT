@@ -8,6 +8,7 @@ import path from 'path'
 import Chat from './models/chat.js'
 import UserChats from './models/userChats.js'
 import {ClerkExpressRequireAuth} from "@clerk/clerk-sdk-node"
+import { ClerkExpressWithAuth } from "@clerk/clerk-sdk-node";
 
 dotenv.config()
 const port = process.env.PORT || 3000
@@ -31,6 +32,7 @@ app.options("*", cors({
 }));
 
 app.use(express.json())
+app.use(ClerkExpressWithAuth());
 
 const connect = async () => {
   try {
