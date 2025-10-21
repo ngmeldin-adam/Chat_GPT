@@ -36,7 +36,7 @@ const Newprompt = ({data}) => {
     const queryClient = useQueryClient()
     const mutaion = useMutation({
        mutationFn:()=>{
-        return fetch(`https://lemon-ai-nato.onrender.com/api/chats/${data._id}`,{
+        return fetch(`${import.meta.env.VITE_API_URL}/api/chats/${data._id}`,{
             method:"PUT",
             credentials:"include",
             headers:{
