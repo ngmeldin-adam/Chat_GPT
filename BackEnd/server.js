@@ -16,15 +16,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
-
+dotenv.config()
 app.use(
   cors({
     origin:process.env.CLIENT_URL,
     credentials:true,
-    method:["GET","POST"],
+    methods:["GET","POST"],
 }))
 
-dotenv.config()
+
 app.use(express.json())
 
 const connect = async () => {
