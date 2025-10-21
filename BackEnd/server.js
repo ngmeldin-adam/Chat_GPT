@@ -147,12 +147,12 @@ app.use((err,req,res,next) => {
 
 })
 
-//app.use(express.static(path.join(__dirname,"../FrontEnd")))
+app.use(express.static(path.join(__dirname,"../FrontEnd")))
 
-//app.get("*",(req,res)=>{
+app.get("*",(req,res)=>{
 
- // res.sendFile(path.join(__dirname,"../FrontEnd","index.html"))
-//})
+  res.sendFile(path.join(__dirname,"../FrontEnd","index.html"))
+})
 
  
     app.listen(port, () => {
