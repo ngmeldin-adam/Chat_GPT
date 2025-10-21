@@ -1,22 +1,17 @@
 import {Link} from 'react-router-dom'
 import Logo from '../Image/logo.png'
 import { useQuery } from '@tanstack/react-query'
-import { useAuth } from "@clerk/clerk-react";
+
 const ChatList = () =>{
-     const { getToken } = useAuth();
-    const {isPending , error , data} = useQuery({
+    
+  const {isPending , error , data} = useQuery({
         queryKey:["userChats"],
-       queryFn: async () => {
-    const token = await getToken();
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/userchats`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    if (!res.ok) throw new Error("Failed to fetch user chats");
-    return res.json();
-  },
-});
+        queryFn:()=>
+            fetch(`${import.meta.env.VITE_API_URL}/api/userchats`,{
+                    credentials:"include",
+                }
+            ).then((res) => res.json())
+    })
     return(
         <div className="flex flex-col h-full ">
             <span className='font-600 text-[11px] mb-[10px]'>DASHBOARD</span>
