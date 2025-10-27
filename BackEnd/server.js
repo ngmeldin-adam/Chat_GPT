@@ -7,7 +7,8 @@ import url , {fileURLToPath} from 'url';
 import path from 'path'
 import Chat from './models/chat.js'
 import UserChats from './models/userChats.js'
-//import {ClerkExpressRequireAuth} from "@clerk/clerk-sdk-node"
+//import { ClerkExpressWithAuth } from '@clerk/clerk-sdk-node'
+import {ClerkExpressRequireAuth} from "@clerk/clerk-sdk-node"
 
 dotenv.config()
 const port = process.env.PORT || 3000
@@ -20,11 +21,13 @@ const __dirname = path.dirname(__filename);
 app.use(
   cors({
     origin:process.env.CLIENT_URL,
-    credentials:true
+    credentials:true,
+
 }))
 
 
 app.use(express.json())
+//app.use(ClerkExpressWithAuth())
 
 const connect = async () => {
   try {
@@ -47,7 +50,7 @@ app.get("/api/upload",(req,res)=>{
 })
 
 // creating userchat
-app.post("/api/chats", async(req,res)=>{
+app.post("/api/chats",ClerkExpressRequireAuth(), async(req,res)=>{
   const userId = req.auth.userId;
   const {text} = req.body;
  
@@ -91,7 +94,7 @@ app.post("/api/chats", async(req,res)=>{
     } 
 })
 
-app.get("/api/userchats",async(req,res)=>{
+app.get("/api/userchats",ClerkExpressRequireAuth(),async(req,res)=>{
   const userId = req.auth.userId;
   try{
    const userChats = await UserChats.find({userId})
@@ -102,7 +105,7 @@ app.get("/api/userchats",async(req,res)=>{
   }
 })
 
-app.get("/api/chats/:id",async(req,res)=>{
+app.get("/api/chats/:id",ClerkExpressRequireAuth(),async(req,res)=>{
   const userId = req.auth.userId;
   try{
    const chat = await Chat.findOne({_id:req.params.id,userId})
@@ -113,7 +116,7 @@ app.get("/api/chats/:id",async(req,res)=>{
   }
 })
 
-app.put("/api/chats/:id",async(req,res)=>{
+app.put("/api/chats/:id",ClerkExpressRequireAuth(),async(req,res)=>{
   const userId = req.auth.userId;
   const {question , answer , img} = req.body;
   const newItems = [
@@ -141,11 +144,18 @@ app.put("/api/chats/:id",async(req,res)=>{
     res.status(500).send("Error adding conversation!")
   }
 })
-//app.use((err,req,res,next) => {
-//  console.error(err.stack);
- // res.status(401).send("Unauthenticated!")
 
-//})
+   app.use((err,req,res,next) => {
+   console.error(err.stack);
+  res.status(401).send("Unauthenticated!")
+})
+
+// app.use(express.static(path.join(__dirname,"../FrontEnd")))
+
+// app.get("*",(req,res)=>{
+
+//   res.sendFile(path.join(__dirname,"../FrontEnd","index.html"))
+// })
 
  
     app.listen(port, () => {
@@ -153,5 +163,8 @@ app.put("/api/chats/:id",async(req,res)=>{
         console.log("Server running on 3000");
       });
      
+ 
+
+
  
 
