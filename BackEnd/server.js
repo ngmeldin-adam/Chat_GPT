@@ -8,7 +8,6 @@ import path from 'path'
 import Chat from './models/chat.js'
 import UserChats from './models/userChats.js'
 import {ClerkExpressRequireAuth} from "@clerk/clerk-sdk-node"
-import { ClerkExpressWithAuth } from "@clerk/clerk-sdk-node";
 
 dotenv.config()
 const port = process.env.PORT || 3000
@@ -21,16 +20,9 @@ const __dirname = path.dirname(__filename);
 app.use(
   cors({
     origin:process.env.CLIENT_URL,
-    credentials:true,
-    methods:["GET","POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials:true
 }))
 
-app.options("*", cors({
-  origin: process.env.CLIENT_URL,
-  credentials: true,
-  methods: ["GET", "POST"],
-}));
 
 app.use(express.json())
 app.use(ClerkExpressWithAuth());
@@ -154,13 +146,6 @@ app.use((err,req,res,next) => {
   console.error(err.stack);
   res.status(401).send("Unauthenticated!")
 
-})
-
-app.use(express.static(path.join(__dirname,"../FrontEnd")))
-
-app.get("*",(req,res)=>{
-
-  res.sendFile(path.join(__dirname,"../FrontEnd","index.html"))
 })
 
  
