@@ -7,7 +7,6 @@ import url , {fileURLToPath} from 'url';
 import path from 'path'
 import Chat from './models/chat.js'
 import UserChats from './models/userChats.js'
-//import { ClerkExpressWithAuth } from '@clerk/clerk-sdk-node'
 import {ClerkExpressRequireAuth} from "@clerk/clerk-sdk-node"
 
 dotenv.config()
@@ -27,7 +26,7 @@ app.use(
 
 
 app.use(express.json())
-//app.use(ClerkExpressWithAuth())
+
 
 const connect = async () => {
   try {
