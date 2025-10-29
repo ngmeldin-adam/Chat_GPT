@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom'
 import Bot from "../Image/bot.png";
+import bg from "../Image/bg.png";
 import {TypeAnimation} from "react-type-animation"
 import { useState } from 'react';
 import Logo from '../Image/logo.png'
@@ -27,8 +28,8 @@ const Home = () => {
           h-[50%] w-[80%]  relative">
             <div className="w-full h-full overflow-hidden absolute top-0 left-0 rounded-[50px]">
       
-                <div className="bg-[url(bg.png)] opacity-[0.2] w-[200%] h-full bg-auto-full
-                animate-slideBg"></div>
+                <div className="opacity-[0.2] w-[200%] h-full bg-auto-full
+                animate-slideBg" style={{ backgroundImage: `url(${bg})` }}></div>
             </div>
             <img  src={Bot} alt="Error" className='w-full h-full object-contain
             animate-botAnimation' />
